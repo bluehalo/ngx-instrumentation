@@ -1,9 +1,9 @@
 {
-	"name": "@asymmetrik/ngx-template",
-	"artifactName": "ngx-template",
-	"moduleName": "ngxTemplate",
-	"description": "Angular.io components template project",
-	"version": "1.6.0",
+	"name": "@asymmetrik/ngx-instrumentation",
+	"artifactName": "ngx-instrumentation",
+	"moduleName": "ngxInstrumentation",
+	"description": "Angular.io components and services for instrumenting errors, performance, and user actions",
+	"version": "0.0.0",
 	"author": "Asymmetrik, Ltd.",
 	"copyright": "Copyright Asymmetrik, Ltd. 2007-2017 - All Rights Reserved.",
 	"license": "MIT",
@@ -11,14 +11,14 @@
 	"scripts": {
 	},
 
-	"main": "dist/bundles/ngx-template.js",
+	"main": "dist/bundles/ngx-instrumentation.js",
 	"module": "dist/index.js",
 	"jsnext:main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Asymmetrik/ngx-template.git"
+		"url": "https://github.com/Asymmetrik/ngx-instrumentation.git"
 	},
 
 	"peerDependencies": {
@@ -33,6 +33,7 @@
 		"@angular/core": "5",
 		"@angular/platform-browser": "5",
 		"@angular/platform-browser-dynamic": "5",
+		"@angular/router": "5",
 
 		"core-js": "2.5",
 

@@ -124,6 +124,7 @@ gulp.task('webpack-dev-server', (done) => {
 	let webpackConfig = require('./config/webpack.config.js')();
 	let compiler = webpack(webpackConfig);
 	let port = 9000;
+	let serverPort = 9001;
 
 	new webpackDevServer(compiler, {
 		stats: {
@@ -134,12 +135,32 @@ gulp.task('webpack-dev-server', (done) => {
 			aggregateTimeout: 500,
 			poll: 1000
 		},
+		proxy: {
+			'/api/*': {
+				'target': `http://localhost:${serverPort}` ,
+				'pathRewrite': {'^/api': '' },
+				'secure': false,
+				'logLevel': 'debug'
+			}
+		}
 	}).listen(port, 'localhost', (err) => {
 		if(err) throw new plugins.util.PluginError('webpack', err);
 
 		// Server listening
 		plugins.util.log('[webpack]', `http://localhost:${port}/webpack-dev-server/index.html`);
 	});
+
+
+	// Launch the dev REST server
+	const app = require('express')();
+	app.use(require('body-parser').json());
+
+	app.post('/metrics', (req, res) => {
+		console.log(req.body);
+		return res.status(200).end();
+	});
+
+	app.listen(serverPort, () => console.log(`Metrics logging server running on port: ${serverPort}`));
 });
 
 gulp.task('watch-ts', () => {

@@ -1,0 +1,23 @@
+<section class="container">
+
+	<routerInstrumentation></routerInstrumentation>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Angular.io Instrumentation Demo</h1>
+
+			<div class="links">
+				<a routerLink="/">Default Route</a> |
+				<a [routerLink]="[ '/param', param ]">Route with Param</a> |
+				<a routerLink="/parent/child">Child Route</a> |
+				<a routerLink="/http">Http Call</a> |
+				<a routerLink="/error">Throw Error</a> |
+				<a routerLink="/asdfasdfadsfasdf">Missing Route</a>
+			</div>
+
+			<router-outlet></router-outlet>
+
+		</div>
+	</div>
+
+</section>
