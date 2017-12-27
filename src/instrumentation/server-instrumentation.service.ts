@@ -12,7 +12,7 @@ export class ServerInstrumentationService implements InstrumentationService {
 	}
 
 	setUrl(url: string) {
-	 	this.url = url;
+		this.url = url;
 	}
 
 	handleEvent(event: any, type: string) {

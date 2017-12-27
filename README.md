@@ -59,7 +59,7 @@ The default instrumentation service (InstrumentationService) logs events to the 
 To use it, provide InstrumentationService as follows:  
 
 ```js
-import { InstrumentationService } from '@asymmetrik/ngx-instrumnetation/instrumentation.service';
+import { InstrumentationModule, InstrumentationService } from '@asymmetrik/ngx-instrumnetation';
 
 ...
 providers: [
@@ -78,8 +78,7 @@ In the following example, the REST call will be a POST to ```api/metrics```.
 
 ```js
 import { HttpBackend, HttpClientModule } from '@angular/common/http';
-import { InstrumentationModule } from './instrumentation/instrumentation.module';
-import { ServerInstrumentationService } from './instrumentation/server-instrumentation.service';
+import { InstrumentationModule, InstrumentationService, ServerInstrumentationService } from '@asymmetrik/ngx-instrumentation';
 
 @NgModule({
   ...
@@ -137,7 +136,7 @@ To configure it, you have to provide the ```InstrumentErrorHandler``` to the app
 
 ```js
 import { ErrorHandler, NgModule } from '@angular/core';
-import { InstrumentErrorHandler } from './instrumentation/integrations/instrument-error-handler';
+import { InstrumentationModule, InstrumentErrorHandler } from '@asymmetrik/ngx-instrumentation';
 
 @NgModule({
   ...
@@ -156,9 +155,8 @@ This integration captures all HTTP calls made in the application.
 To configure it, you have to provide the Instrument HTTP interceptor.
 
 ```js
-import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
-import { InstrumentationModule } from '@asymmetrik/ngx-instrumentation/instrumentation/instrumentation.module';
-import { InstrumentHttpInterceptor } from '@asymmetrik/ngx-instrumentation/instrumentation/integrations/instrument-http-interceptor';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { InstrumentationModule, InstrumentHttpInterceptor } from '@asymmetrik/ngx-instrumentation';
 
 @NgModule({
   ...
