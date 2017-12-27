@@ -3,16 +3,24 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HttpR
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
 import { InstrumentationService } from '../instrumentation.service';
+/**
+ * HTTP Interceptor that till pass HTTP calls, their data, and associated performance metrics
+ * to the Instrumentation Service. Calculated start/finish/elapsed time for calls and includes
+ * the request information as well as response status.
+ */
 var InstrumentHttpInterceptor = /** @class */ (function () {
     function InstrumentHttpInterceptor(instrumentationService) {
+        // Nothing here
         this.instrumentationService = instrumentationService;
     }
     InstrumentHttpInterceptor.prototype.intercept = function (req, next) {
         var _this = this;
+        // Store the request start time
         var started = Date.now();
         return next.handle(req)
             .do(function (res) {
             if (res instanceof HttpResponse) {
+                // Grab the finish time
                 var finished = Date.now();
                 var event_1 = {
                     started: started,
@@ -24,11 +32,28 @@ var InstrumentHttpInterceptor = /** @class */ (function () {
                     params: _this.extractParams(req.params),
                     status: res.status
                 };
+                // Pass the complete event to the instrumentation service
+                // Pass the complete event to the instrumentation service
                 _this.instrumentationService.handleEvent(event_1, 'http');
             }
         });
     };
-    InstrumentHttpInterceptor.prototype.extractParams = function (params) {
+    /**
+     * Convert HttpParams to a map of literal values
+     * @param {HttpParams} params
+     * @returns {any} Map of key to array of literal values
+     */
+    /**
+         * Convert HttpParams to a map of literal values
+         * @param {HttpParams} params
+         * @returns {any} Map of key to array of literal values
+         */
+    InstrumentHttpInterceptor.prototype.extractParams = /**
+         * Convert HttpParams to a map of literal values
+         * @param {HttpParams} params
+         * @returns {any} Map of key to array of literal values
+         */
+    function (params) {
         var toReturn = {};
         if (null != params) {
             params.keys().forEach(function (k) {

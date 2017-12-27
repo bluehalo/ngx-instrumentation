@@ -4,6 +4,12 @@ import { Subscription } from 'rxjs';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pairwise';
 import { InstrumentationService } from '../instrumentation.service';
+/**
+ * Directive that will log all router events. Handles success and error.
+ * Currently ignores Cancel events. For each handled event, will pass
+ * the last successful event as previous and the current event as current.
+ * Also, extracts the router state to include route params and urls.
+ */
 export declare class InstrumentRouterDirective implements OnDestroy, OnInit {
     private router;
     private instrumentationService;

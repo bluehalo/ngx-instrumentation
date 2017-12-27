@@ -7,16 +7,25 @@ import 'rxjs/add/operator/pairwise';
 
 import { InstrumentationService } from '../instrumentation.service';
 
+/**
+ * Directive that will log all router events. Handles success and error.
+ * Currently ignores Cancel events. For each handled event, will pass
+ * the last successful event as previous and the current event as current.
+ * Also, extracts the router state to include route params and urls.
+ */
 @Directive({
 	selector: 'routerInstrumentation'
 })
 export class InstrumentRouterDirective implements OnDestroy, OnInit {
 
+	// The router event subscription that emits router events
 	routerEventSubscription: Subscription;
 
 	constructor(
 		private router: Router,
-		private instrumentationService: InstrumentationService) { }
+		private instrumentationService: InstrumentationService) {
+		// Nothing here
+	}
 
 	ngOnInit() {
 
@@ -49,8 +58,11 @@ export class InstrumentRouterDirective implements OnDestroy, OnInit {
 				// Error navigation, so assume route didn't change
 				event.type = 'error';
 
+				// Current in this case is a Navigation Error event
 				event.current = this.extractNavigationErrorInfo(current as NavigationError);
-				event.previous = this.extractNavigationErrorInfo(previous as NavigationError);
+
+				// Previous is always a Navigation End event
+				event.previous = this.extractNavigationEndInfo(previous as NavigationEnd);
 
 			}
 			else if (current instanceof NavigationCancel) {
@@ -60,8 +72,10 @@ export class InstrumentRouterDirective implements OnDestroy, OnInit {
 
 			}
 
+			// Only if it was a recognized navigation event type
 			if (null != event.type) {
 
+				// Construct the route snapshot
 				let activatedRouteSnapshot = null;
 				if (null != routerState && null != routerState.snapshot) {
 					activatedRouteSnapshot = routerState.snapshot.root;

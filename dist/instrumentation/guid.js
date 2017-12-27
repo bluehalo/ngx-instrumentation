@@ -1,7 +1,17 @@
-var Guid = /** @class */ (function () {
+/**
+ * Basic implementation of a pseudo-random GUID
+ */
+var /**
+ * Basic implementation of a pseudo-random GUID
+ */
+Guid = /** @class */ (function () {
     function Guid() {
     }
-    Guid.s4 = function () {
+    // Generate a pseudo-random GUID
+    // Generate a pseudo-random GUID
+    Guid.s4 = 
+    // Generate a pseudo-random GUID
+    function () {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
@@ -11,5 +21,8 @@ var Guid = /** @class */ (function () {
     };
     return Guid;
 }());
+/**
+ * Basic implementation of a pseudo-random GUID
+ */
 export { Guid };
 //# sourceMappingURL=guid.js.map

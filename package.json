@@ -3,7 +3,7 @@
 	"artifactName": "ngx-instrumentation",
 	"moduleName": "ngxInstrumentation",
 	"description": "Angular.io components and services for instrumenting errors, performance, and user actions",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"author": "Asymmetrik, Ltd.",
 	"copyright": "Copyright Asymmetrik, Ltd. 2007-2017 - All Rights Reserved.",
 	"license": "MIT",

@@ -4,8 +4,15 @@ import { Subscription } from 'rxjs';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pairwise';
 import { InstrumentationService } from '../instrumentation.service';
+/**
+ * Directive that will log all router events. Handles success and error.
+ * Currently ignores Cancel events. For each handled event, will pass
+ * the last successful event as previous and the current event as current.
+ * Also, extracts the router state to include route params and urls.
+ */
 var InstrumentRouterDirective = /** @class */ (function () {
     function InstrumentRouterDirective(router, instrumentationService) {
+        // Nothing here
         this.router = router;
         this.instrumentationService = instrumentationService;
     }
@@ -30,14 +37,18 @@ var InstrumentRouterDirective = /** @class */ (function () {
             else if (current instanceof NavigationError) {
                 // Error navigation, so assume route didn't change
                 event.type = 'error';
+                // Current in this case is a Navigation Error event
                 event.current = _this.extractNavigationErrorInfo(current);
-                event.previous = _this.extractNavigationErrorInfo(previous);
+                // Previous is always a Navigation End event
+                event.previous = _this.extractNavigationEndInfo(previous);
             }
             else if (current instanceof NavigationCancel) {
                 // Navigation cancel is if a guard cancels a route change
                 // event.type = 'cancel';
             }
+            // Only if it was a recognized navigation event type
             if (null != event.type) {
+                // Construct the route snapshot
                 var activatedRouteSnapshot = null;
                 if (null != routerState && null != routerState.snapshot) {
                     activatedRouteSnapshot = routerState.snapshot.root;

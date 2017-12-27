@@ -1,4 +1,10 @@
-var InstrumentationService = /** @class */ (function () {
+/**
+ * Default basic instrumentation service, logs events to console.
+ */
+var /**
+ * Default basic instrumentation service, logs events to console.
+ */
+InstrumentationService = /** @class */ (function () {
     function InstrumentationService() {
     }
     InstrumentationService.prototype.handleEvent = function (event, type) {
@@ -7,5 +13,8 @@ var InstrumentationService = /** @class */ (function () {
     };
     return InstrumentationService;
 }());
+/**
+ * Default basic instrumentation service, logs events to console.
+ */
 export { InstrumentationService };
 //# sourceMappingURL=instrumentation.service.js.map

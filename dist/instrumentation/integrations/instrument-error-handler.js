@@ -1,16 +1,22 @@
 import { ErrorHandler, Injectable } from '@angular/core';
 import { InstrumentationService } from '../instrumentation.service';
+/**
+ * Error Handler that passes errors to the instrumentation service implementation
+ * that is injected. This handler will merely pass through the message and stack.
+ */
 var InstrumentErrorHandler = /** @class */ (function () {
     function InstrumentErrorHandler(instrumentationService) {
+        // Nothing here
         this.instrumentationService = instrumentationService;
     }
     InstrumentErrorHandler.prototype.handleError = function (error) {
-        var event = {};
         if (null != error) {
-            event.message = error.message;
-            event.stack = error.stack;
+            // Call the instrumentation service to handle the error event
+            this.instrumentationService.handleEvent({
+                message: error.message,
+                stack: error.stack
+            }, 'error');
         }
-        this.instrumentationService.handleEvent(event, 'error');
     };
     InstrumentErrorHandler.decorators = [
         { type: Injectable },
