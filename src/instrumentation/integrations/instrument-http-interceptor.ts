@@ -14,8 +14,14 @@ import { InstrumentationService } from '../instrumentation.service';
 @Injectable()
 export class InstrumentHttpInterceptor implements HttpInterceptor {
 
+	includeParams: boolean = false;
+
 	constructor(private instrumentationService: InstrumentationService) {
 		// Nothing here
+	}
+
+	setIncludeParams(v: boolean) {
+		this.includeParams = v;
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,18 +37,21 @@ export class InstrumentHttpInterceptor implements HttpInterceptor {
 					// Grab the finish time
 					const finished = Date.now();
 
-					const event = {
+					const event: any = {
 						started,
 						finished,
 						elapsed: finished - started,
 
 						method: req.method,
 						url: req.url,
-						body: req.body,
-						params: this.extractParams(req.params),
 
 						status: (res as HttpResponse<any>).status
 					};
+
+					if (this.includeParams) {
+						event.body = req.body;
+						event.params = this.extractParams(req.params);
+					}
 
 					// Pass the complete event to the instrumentation service
 					this.instrumentationService.handleEvent(event, 'http');

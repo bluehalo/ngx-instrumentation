@@ -12,7 +12,11 @@ var InstrumentHttpInterceptor = /** @class */ (function () {
     function InstrumentHttpInterceptor(instrumentationService) {
         // Nothing here
         this.instrumentationService = instrumentationService;
+        this.includeParams = false;
     }
+    InstrumentHttpInterceptor.prototype.setIncludeParams = function (v) {
+        this.includeParams = v;
+    };
     InstrumentHttpInterceptor.prototype.intercept = function (req, next) {
         var _this = this;
         // Store the request start time
@@ -28,10 +32,12 @@ var InstrumentHttpInterceptor = /** @class */ (function () {
                     elapsed: finished - started,
                     method: req.method,
                     url: req.url,
-                    body: req.body,
-                    params: _this.extractParams(req.params),
                     status: res.status
                 };
+                if (_this.includeParams) {
+                    event_1.body = req.body;
+                    event_1.params = _this.extractParams(req.params);
+                }
                 // Pass the complete event to the instrumentation service
                 // Pass the complete event to the instrumentation service
                 _this.instrumentationService.handleEvent(event_1, 'http');

@@ -152,6 +152,8 @@ export class AppModule { }
 
 ### HTTP Interceptor
 This integration captures all HTTP calls made in the application.
+Excludes parameters and body info by default (so it doesn't log sensitive information like passwords).
+You can override the config by using useFactory like how you do for the ServerInstrumentationService.
 To configure it, you have to provide the Instrument HTTP interceptor.
 
 ```js
