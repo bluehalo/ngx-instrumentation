@@ -45,6 +45,6 @@ import { DefaultComponent } from './default.component';
 })
 export class InstrumentationDemoModule { }
 
-function serverInstrumentationServiceFactory(httpBackend: HttpBackend) {
+export function serverInstrumentationServiceFactory(httpBackend: HttpBackend) {
 	return new ServerInstrumentationService(httpBackend, '/api/metrics');
 }
