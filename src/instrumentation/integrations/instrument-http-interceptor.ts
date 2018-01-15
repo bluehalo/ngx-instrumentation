@@ -14,14 +14,8 @@ import { InstrumentationService } from '../instrumentation.service';
 @Injectable()
 export class InstrumentHttpInterceptor implements HttpInterceptor {
 
-	includeParams: boolean = false;
-
-	constructor(private instrumentationService: InstrumentationService) {
+	constructor(private instrumentationService: InstrumentationService, public includeParams: boolean = false) {
 		// Nothing here
-	}
-
-	setIncludeParams(v: boolean) {
-		this.includeParams = v;
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

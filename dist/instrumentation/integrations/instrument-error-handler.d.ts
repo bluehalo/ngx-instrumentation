@@ -6,6 +6,7 @@ import { InstrumentationService } from '../instrumentation.service';
  */
 export declare class InstrumentErrorHandler implements ErrorHandler {
     private instrumentationService;
-    constructor(instrumentationService: InstrumentationService);
+    logErrorsToConsole: boolean;
+    constructor(instrumentationService: InstrumentationService, logErrorsToConsole?: boolean);
     handleError(error: Error): void;
 }

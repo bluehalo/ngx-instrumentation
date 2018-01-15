@@ -39,7 +39,7 @@ import { DefaultComponent } from './default.component';
 	providers: [
 		HttpClient,
 		{ provide: InstrumentationService, useFactory: serverInstrumentationServiceFactory, deps: [ HttpBackend ] },
-		{ provide: ErrorHandler, useClass: InstrumentErrorHandler },
+		{ provide: ErrorHandler, useFactory: errorHandlerFactory, deps: [ InstrumentationService ] },
 		{ provide: HTTP_INTERCEPTORS, useClass: InstrumentHttpInterceptor, multi: true }
 	]
 })
@@ -47,4 +47,8 @@ export class InstrumentationDemoModule { }
 
 export function serverInstrumentationServiceFactory(httpBackend: HttpBackend) {
 	return new ServerInstrumentationService(httpBackend, '/api/metrics');
+}
+
+export function errorHandlerFactory(instrumentationService: InstrumentationService) {
+	return new InstrumentErrorHandler(instrumentationService, true);
 }

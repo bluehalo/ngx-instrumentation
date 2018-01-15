@@ -9,14 +9,12 @@ import { InstrumentationService } from '../instrumentation.service';
  * the request information as well as response status.
  */
 var InstrumentHttpInterceptor = /** @class */ (function () {
-    function InstrumentHttpInterceptor(instrumentationService) {
+    function InstrumentHttpInterceptor(instrumentationService, includeParams) {
+        if (includeParams === void 0) { includeParams = false; }
         // Nothing here
         this.instrumentationService = instrumentationService;
-        this.includeParams = false;
+        this.includeParams = includeParams;
     }
-    InstrumentHttpInterceptor.prototype.setIncludeParams = function (v) {
-        this.includeParams = v;
-    };
     InstrumentHttpInterceptor.prototype.intercept = function (req, next) {
         var _this = this;
         // Store the request start time
@@ -74,6 +72,7 @@ var InstrumentHttpInterceptor = /** @class */ (function () {
     /** @nocollapse */
     InstrumentHttpInterceptor.ctorParameters = function () { return [
         { type: InstrumentationService, },
+        null,
     ]; };
     return InstrumentHttpInterceptor;
 }());

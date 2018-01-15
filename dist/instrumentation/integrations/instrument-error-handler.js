@@ -5,12 +5,19 @@ import { InstrumentationService } from '../instrumentation.service';
  * that is injected. This handler will merely pass through the message and stack.
  */
 var InstrumentErrorHandler = /** @class */ (function () {
-    function InstrumentErrorHandler(instrumentationService) {
+    function InstrumentErrorHandler(instrumentationService, logErrorsToConsole) {
+        if (logErrorsToConsole === void 0) { logErrorsToConsole = true; }
         // Nothing here
         this.instrumentationService = instrumentationService;
+        this.logErrorsToConsole = logErrorsToConsole;
     }
     InstrumentErrorHandler.prototype.handleError = function (error) {
         if (null != error) {
+            // Log errors to console
+            if (this.logErrorsToConsole) {
+                // tslint:disable-next-line:no-console
+                console.error(error);
+            }
             // Call the instrumentation service to handle the error event
             this.instrumentationService.handleEvent({
                 message: error.message,
@@ -24,6 +31,7 @@ var InstrumentErrorHandler = /** @class */ (function () {
     /** @nocollapse */
     InstrumentErrorHandler.ctorParameters = function () { return [
         { type: InstrumentationService, },
+        null,
     ]; };
     return InstrumentErrorHandler;
 }());
