@@ -1,6 +1,5 @@
-import { Directive, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot, Event, NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Directive } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pairwise';
 import { InstrumentationService } from '../instrumentation.service';
@@ -65,7 +64,10 @@ var InstrumentRouterDirective = /** @class */ (function () {
         return {
             id: event.id,
             url: event.url,
-            error: event.error
+            error: {
+                message: (null != event.error) ? event.error.message : '',
+                stack: (null != event.error) ? event.error.stack : ''
+            }
         };
     };
     InstrumentRouterDirective.prototype.extractNavigationEndInfo = function (event) {
@@ -80,11 +82,17 @@ var InstrumentRouterDirective = /** @class */ (function () {
     };
     InstrumentRouterDirective.prototype.extractActivatedRouteSnapshot = function (snapshot, max) {
         var _this = this;
-        if (max === void 0) { max = 0; }
+        if (max === void 0) { max = 20; }
         var toReturn = {};
         // Get the child snapshots
         if (null != snapshot.children) {
-            toReturn.children = snapshot.children.map(function (c) { return _this.extractActivatedRouteSnapshot(c, max++); });
+            // Only keep going if we haven't exceeded the max levels
+            if (max > 0) {
+                toReturn.children = snapshot.children.map(function (c) { return _this.extractActivatedRouteSnapshot(c, max--); });
+            }
+            else {
+                toReturn.children = [];
+            }
         }
         // Get the component name (if it exists)
         if (null != snapshot.component) {

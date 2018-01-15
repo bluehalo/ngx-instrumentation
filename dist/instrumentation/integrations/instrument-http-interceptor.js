@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/do';
 import { InstrumentationService } from '../instrumentation.service';
 /**
@@ -9,11 +8,10 @@ import { InstrumentationService } from '../instrumentation.service';
  * the request information as well as response status.
  */
 var InstrumentHttpInterceptor = /** @class */ (function () {
-    function InstrumentHttpInterceptor(instrumentationService, includeParams) {
-        if (includeParams === void 0) { includeParams = false; }
+    function InstrumentHttpInterceptor(instrumentationService) {
         // Nothing here
         this.instrumentationService = instrumentationService;
-        this.includeParams = includeParams;
+        this.includeParams = false;
     }
     InstrumentHttpInterceptor.prototype.intercept = function (req, next) {
         var _this = this;
@@ -72,7 +70,6 @@ var InstrumentHttpInterceptor = /** @class */ (function () {
     /** @nocollapse */
     InstrumentHttpInterceptor.ctorParameters = function () { return [
         { type: InstrumentationService, },
-        null,
     ]; };
     return InstrumentHttpInterceptor;
 }());

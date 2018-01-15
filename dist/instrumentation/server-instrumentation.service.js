@@ -1,6 +1,5 @@
-import { InstrumentationService } from './instrumentation.service';
 import { Guid } from './guid';
-import { HttpBackend, HttpRequest } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 /**
  * Basic server logging for instrumentation service. Passes events as HTTP POST to
  * configured server endpoint. Uses the HttpBackend to avoid HTTPInterceptors.
@@ -26,29 +25,17 @@ var /**
  * }
  */
 ServerInstrumentationService = /** @class */ (function () {
-    function ServerInstrumentationService(httpBackend, url) {
-        if (url === void 0) { url = '/api/metrics'; }
+    function ServerInstrumentationService(httpBackend) {
         // Nothing here
         this.httpBackend = httpBackend;
-        this.url = url;
+        /**
+             * Determines the URL of the server instrumentation service endpoint
+             * @type {string}
+             */
+        this.url = '/api/metrics';
         // simple uuid that represents the current browser tab/session
         this.sessionId = Guid.guid();
     }
-    /**
-     * The URL of the server endpoint to which to POST events
-     * @param {string} url
-     */
-    /**
-         * The URL of the server endpoint to which to POST events
-         * @param {string} url
-         */
-    ServerInstrumentationService.prototype.setUrl = /**
-         * The URL of the server endpoint to which to POST events
-         * @param {string} url
-         */
-    function (url) {
-        this.url = url;
-    };
     /**
      * Handle instrumentation events.
      * @param event The event to handle

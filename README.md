@@ -98,7 +98,10 @@ import { InstrumentationModule, InstrumentationService, ServerInstrumentationSer
 export class AppModule { }
 
 export function serverInstrumentationServiceFactory(httpBackend: HttpBackend) {
-  return new ServerInstrumentationService(httpBackend, '/api/metrics');
+	const svc = new ServerInstrumentationService(httpBackend);
+	svc.url = '/api/metrics';
+
+	return svc;
 }
 
 ```
@@ -169,7 +172,10 @@ import { InstrumentationModule, InstrumentErrorHandler, InstrumentationService }
 export class AppModule { }
 
 export function errorHandlerFactory(instrumentationService: InstrumentationService) {
-	return new InstrumentErrorHandler(instrumentationService, false);
+	const handler = new InstrumentErrorHandler(instrumentationService);
+	handler.logErrorsToConsole = true;
+
+	return handler;
 }
 
 ```

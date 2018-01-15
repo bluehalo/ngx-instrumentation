@@ -98,7 +98,10 @@ export class InstrumentRouterDirective implements OnDestroy, OnInit {
 		return {
 			id: event.id,
 			url: event.url,
-			error: event.error
+			error: {
+				message: (null != event.error) ? event.error.message : '',
+				stack: (null != event.error) ? event.error.stack : ''
+			}
 		};
 
 	}
@@ -117,13 +120,21 @@ export class InstrumentRouterDirective implements OnDestroy, OnInit {
 
 	}
 
-	protected extractActivatedRouteSnapshot(snapshot: ActivatedRouteSnapshot, max: number = 0) {
+	protected extractActivatedRouteSnapshot(snapshot: ActivatedRouteSnapshot, max: number = 20) {
 
 		const toReturn: any = {};
 
 		// Get the child snapshots
 		if (null != snapshot.children) {
-			toReturn.children = snapshot.children.map((c) => this.extractActivatedRouteSnapshot(c, max++));
+
+			// Only keep going if we haven't exceeded the max levels
+			if (max > 0) {
+				toReturn.children = snapshot.children.map((c) => this.extractActivatedRouteSnapshot(c, max--));
+			}
+			else {
+				toReturn.children = [];
+			}
+
 		}
 
 		// Get the component name (if it exists)

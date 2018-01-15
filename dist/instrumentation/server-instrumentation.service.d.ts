@@ -14,14 +14,13 @@ import { HttpBackend } from '@angular/common/http';
  */
 export declare class ServerInstrumentationService implements InstrumentationService {
     private httpBackend;
-    private url;
-    sessionId: string;
-    constructor(httpBackend: HttpBackend, url?: string);
     /**
-     * The URL of the server endpoint to which to POST events
-     * @param {string} url
+     * Determines the URL of the server instrumentation service endpoint
+     * @type {string}
      */
-    setUrl(url: string): void;
+    url: string;
+    sessionId: string;
+    constructor(httpBackend: HttpBackend);
     /**
      * Handle instrumentation events.
      * @param event The event to handle
