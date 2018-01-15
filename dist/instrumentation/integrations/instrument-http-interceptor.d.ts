@@ -10,8 +10,7 @@ import { InstrumentationService } from '../instrumentation.service';
 export declare class InstrumentHttpInterceptor implements HttpInterceptor {
     private instrumentationService;
     includeParams: boolean;
-    constructor(instrumentationService: InstrumentationService);
-    setIncludeParams(v: boolean): void;
+    constructor(instrumentationService: InstrumentationService, includeParams?: boolean);
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
     /**
      * Convert HttpParams to a map of literal values

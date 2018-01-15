@@ -149,6 +149,30 @@ import { InstrumentationModule, InstrumentErrorHandler } from '@asymmetrik/ngx-i
 export class AppModule { }
 ```
 
+*Note:* The global error handler will handle all Angular zone errors.
+To help with development (and to ensure that errors aren't ignored), the plugin still logs errors to the client error console.
+To disable this and hide all Angular errors from the client, you can configure the ```InstrumentErrorHandler``` using ```useFactory``` as follows:
+
+```js
+import { ErrorHandler, NgModule } from '@angular/core';
+import { InstrumentationModule, InstrumentErrorHandler, InstrumentationService } from '@asymmetrik/ngx-instrumentation';
+
+@NgModule({
+  ...
+  providers: [
+  	...
+    { provide: ErrorHandler, useFactory: errorHandlerFactory, deps: [ InstrumentationService ] },
+    ...
+  ],
+  ...
+})
+export class AppModule { }
+
+export function errorHandlerFactory(instrumentationService: InstrumentationService) {
+	return new InstrumentErrorHandler(instrumentationService, false);
+}
+
+```
 
 ### HTTP Interceptor
 This integration captures all HTTP calls made in the application.

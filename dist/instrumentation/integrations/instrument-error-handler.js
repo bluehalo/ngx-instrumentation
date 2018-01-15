@@ -6,7 +6,7 @@ import { InstrumentationService } from '../instrumentation.service';
  */
 var InstrumentErrorHandler = /** @class */ (function () {
     function InstrumentErrorHandler(instrumentationService, logErrorsToConsole) {
-        if (logErrorsToConsole === void 0) { logErrorsToConsole = false; }
+        if (logErrorsToConsole === void 0) { logErrorsToConsole = true; }
         // Nothing here
         this.instrumentationService = instrumentationService;
         this.logErrorsToConsole = logErrorsToConsole;
