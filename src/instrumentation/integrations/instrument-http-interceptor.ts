@@ -14,7 +14,9 @@ import { InstrumentationService } from '../instrumentation.service';
 @Injectable()
 export class InstrumentHttpInterceptor implements HttpInterceptor {
 
-	constructor(private instrumentationService: InstrumentationService, public includeParams: boolean = false) {
+	public includeParams: boolean = false;
+
+	constructor(private instrumentationService: InstrumentationService) {
 		// Nothing here
 	}
 

@@ -9,7 +9,15 @@ import { InstrumentationService } from '../instrumentation.service';
 @Injectable()
 export class InstrumentErrorHandler implements ErrorHandler {
 
-	constructor(private instrumentationService: InstrumentationService, public logErrorsToConsole: boolean = true) {
+	/**
+	 * Determines whether or not handled errors are logged to the client
+	 * console in addition to being passed to the instrumentation service
+	 *
+	 * @type {boolean}
+	 */
+	public logErrorsToConsole: boolean = true;
+
+	constructor(private instrumentationService: InstrumentationService) {
 		// Nothing here
 	}
 

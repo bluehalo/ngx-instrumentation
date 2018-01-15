@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InstrumentRouterDirective } from './integrations/instrument-router.directive';
 var InstrumentationModule = /** @class */ (function () {

@@ -6,7 +6,13 @@ import { InstrumentationService } from '../instrumentation.service';
  */
 export declare class InstrumentErrorHandler implements ErrorHandler {
     private instrumentationService;
+    /**
+     * Determines whether or not handled errors are logged to the client
+     * console in addition to being passed to the instrumentation service
+     *
+     * @type {boolean}
+     */
     logErrorsToConsole: boolean;
-    constructor(instrumentationService: InstrumentationService, logErrorsToConsole?: boolean);
+    constructor(instrumentationService: InstrumentationService);
     handleError(error: Error): void;
 }

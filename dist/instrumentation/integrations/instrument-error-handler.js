@@ -1,15 +1,20 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { InstrumentationService } from '../instrumentation.service';
 /**
  * Error Handler that passes errors to the instrumentation service implementation
  * that is injected. This handler will merely pass through the message and stack.
  */
 var InstrumentErrorHandler = /** @class */ (function () {
-    function InstrumentErrorHandler(instrumentationService, logErrorsToConsole) {
-        if (logErrorsToConsole === void 0) { logErrorsToConsole = true; }
+    function InstrumentErrorHandler(instrumentationService) {
         // Nothing here
         this.instrumentationService = instrumentationService;
-        this.logErrorsToConsole = logErrorsToConsole;
+        /**
+             * Determines whether or not handled errors are logged to the client
+             * console in addition to being passed to the instrumentation service
+             *
+             * @type {boolean}
+             */
+        this.logErrorsToConsole = true;
     }
     InstrumentErrorHandler.prototype.handleError = function (error) {
         if (null != error) {
@@ -31,7 +36,6 @@ var InstrumentErrorHandler = /** @class */ (function () {
     /** @nocollapse */
     InstrumentErrorHandler.ctorParameters = function () { return [
         { type: InstrumentationService, },
-        null,
     ]; };
     return InstrumentErrorHandler;
 }());

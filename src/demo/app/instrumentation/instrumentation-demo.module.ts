@@ -46,9 +46,15 @@ import { DefaultComponent } from './default.component';
 export class InstrumentationDemoModule { }
 
 export function serverInstrumentationServiceFactory(httpBackend: HttpBackend) {
-	return new ServerInstrumentationService(httpBackend, '/api/metrics');
+	const svc = new ServerInstrumentationService(httpBackend);
+	svc.url = '/api/metrics';
+
+	return svc;
 }
 
 export function errorHandlerFactory(instrumentationService: InstrumentationService) {
-	return new InstrumentErrorHandler(instrumentationService, true);
+	const handler = new InstrumentErrorHandler(instrumentationService);
+	handler.logErrorsToConsole = true;
+
+	return handler;
 }

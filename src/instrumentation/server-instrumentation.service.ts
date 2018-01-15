@@ -16,19 +16,17 @@ import { HttpBackend, HttpRequest } from '@angular/common/http';
  */
 export class ServerInstrumentationService implements InstrumentationService {
 
+	/**
+	 * Determines the URL of the server instrumentation service endpoint
+	 * @type {string}
+	 */
+	public url: string = '/api/metrics';
+
 	// simple uuid that represents the current browser tab/session
 	sessionId = Guid.guid();
 
-	constructor(private httpBackend: HttpBackend, private url: string = '/api/metrics') {
+	constructor(private httpBackend: HttpBackend) {
 		// Nothing here
-	}
-
-	/**
-	 * The URL of the server endpoint to which to POST events
-	 * @param {string} url
-	 */
-	setUrl(url: string) {
-		this.url = url;
 	}
 
 	/**
