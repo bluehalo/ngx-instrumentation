@@ -9,13 +9,20 @@ import { InstrumentationService } from '../instrumentation.service';
 @Injectable()
 export class InstrumentErrorHandler implements ErrorHandler {
 
-	constructor(private instrumentationService: InstrumentationService) {
+	constructor(private instrumentationService: InstrumentationService, private logErrorsToConsole: boolean = false) {
 		// Nothing here
 	}
 
 	handleError(error: Error) {
 
 		if (null != error) {
+
+			// Log errors to console
+			if (this.logErrorsToConsole) {
+
+				// tslint:disable-next-line:no-console
+				console.error(error);
+			}
 
 			// Call the instrumentation service to handle the error event
 			this.instrumentationService.handleEvent({
