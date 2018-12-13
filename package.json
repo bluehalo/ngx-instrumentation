@@ -18,7 +18,7 @@
 	"scripts": {
 		"build": "npm run compile && npm run bundle",
 		"prebuild": "npm run lint",
-		"demo": "(webpack-dev-server & npm run watch)",
+		"demo": "(node ./src/demo/demo-server.js & webpack-dev-server & npm run watch)",
 		"predemo": "npm run lint",
 		"bundle": "npm run rollup && npm run uglify",
 		"compile": "ngc -p tsconfig-aot.json",

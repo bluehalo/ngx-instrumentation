@@ -28,6 +28,14 @@ module.exports = () => {
 		watchOptions: {
 			aggregateTimeout: 500,
 			poll: 1000
+		},
+		proxy: {
+			'/api/*': {
+				target: 'http://localhost:4201',
+				pathRewrite: { '^/api': '' },
+				secure: false,
+				logLevel: 'debug'
+			}
 		}
 	};
 
@@ -162,3 +170,4 @@ module.exports = () => {
 
 	return wpConfig;
 };
+
