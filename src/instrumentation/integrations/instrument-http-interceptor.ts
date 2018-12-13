@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/do';
+import { tap } from 'rxjs/operators';
 
 import { InstrumentationService } from '../instrumentation.service';
 
@@ -26,7 +26,7 @@ export class InstrumentHttpInterceptor implements HttpInterceptor {
 		const started = Date.now();
 
 		return next.handle(req)
-			.do((res) => {
+			.pipe(tap((res) => {
 
 				if (res instanceof HttpResponse) {
 
@@ -54,7 +54,7 @@ export class InstrumentHttpInterceptor implements HttpInterceptor {
 
 				}
 
-			});
+			}));
 
 	}
 

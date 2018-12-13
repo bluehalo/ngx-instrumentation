@@ -5,15 +5,16 @@
 [travis-url]: https://travis-ci.org/Asymmetrik/ngx-instrumentation/
 [travis-image]: https://travis-ci.org/Asymmetrik/ngx-instrumentation.svg
 
-
 > Components, services, and classes to help instrument Angular.io applications 
 
 ## Table of Contents
 - [Install](#install)
 - [Usage](#usage)
 - [Structure](#structure)
+- [Changelog](#changelog)
 - [Contribute](#contribute)
 - [License](#license)
+
 
 ## Install
  
@@ -60,7 +61,6 @@ To use it, provide InstrumentationService as follows:
 
 ```js
 import { InstrumentationModule, InstrumentationService } from '@asymmetrik/ngx-instrumnetation';
-
 ...
 providers: [
     ...
@@ -208,6 +208,13 @@ import { InstrumentationModule, InstrumentHttpInterceptor } from '@asymmetrik/ng
 export class AppModule { }
 ```
 
+
+
+## Changelog
+
+### 1.0.0
+- Angular 7
+- Started using the HtmlWebpackPlugin to generate the index.html file in the dist dir, so you don't need to add `/src/demo` to the end of the URL to hit the demo.
 
 ## Contribute
 PRs accepted. If you are part of Asymmetrik, please make contributions on feature branches off of the ```develop``` branch. If you are outside of Asymmetrik, please fork our repo to make contributions.

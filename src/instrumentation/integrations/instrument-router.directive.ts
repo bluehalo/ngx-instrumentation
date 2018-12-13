@@ -2,8 +2,6 @@ import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, Event, NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/pairwise';
 
 import { InstrumentationService } from '../instrumentation.service';
 
