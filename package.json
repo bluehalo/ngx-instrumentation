@@ -7,8 +7,6 @@
 	"author": "Asymmetrik, Ltd.",
 	"copyright": "Copyright Asymmetrik, Ltd. 2007-2019 - All Rights Reserved.",
 	"license": "MIT",
-
-
 	"main": "dist/bundles/ngx-instrumentation.js",
 	"module": "dist/index.js",
 	"jsnext:main": "dist/index.js",
