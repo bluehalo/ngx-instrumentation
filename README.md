@@ -24,7 +24,7 @@ Install the package and its peer dependencies via npm (or yarn):
 npm install ngx-instrumentation
 ```
 
-If you want to run the demo, clone the repository, perform an ```npm install```, ```gulp dev``` and then go to http://localhost:9000/src/demo/index.html
+If you want to run the demo, clone the repository, perform an ```npm install```, ```npm run demo``` and then go to http://localhost:4200
 
 
 ## Usage
