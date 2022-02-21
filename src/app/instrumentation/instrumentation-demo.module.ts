@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 
 import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { InstrumentationModule } from '../../../instrumentation/instrumentation.module';
-import { InstrumentErrorHandler } from '../../../instrumentation/integrations/instrument-error-handler';
-import { InstrumentHttpInterceptor } from '../../../instrumentation/integrations/instrument-http-interceptor';
-import { ServerInstrumentationService } from '../../../instrumentation/server-instrumentation.service';
-import { InstrumentationService } from '../../../instrumentation/instrumentation.service';
+import { InstrumentationModule } from '../../../projects/ngx-instrumentation/src/lib/instrumentation.module';
+import { InstrumentErrorHandler } from '../../../projects/ngx-instrumentation/src/lib/integrations/instrument-error-handler';
+import { InstrumentHttpInterceptor } from '../../../projects/ngx-instrumentation/src/lib/integrations/instrument-http-interceptor';
+import { ServerInstrumentationService } from '../../../projects/ngx-instrumentation/src/lib/server-instrumentation.service';
+import { InstrumentationService } from '../../../projects/ngx-instrumentation/src/lib/instrumentation.service';
 
 import { InstrumentationDemoRoutingModule } from './instrumentation-demo-routing.module';
 import { Module1Module } from './module1/module1.module';

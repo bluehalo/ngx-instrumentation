@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InstrumentRouterDirective } from './integrations/instrument-router.directive';
@@ -15,10 +15,4 @@ import { InstrumentRouterDirective } from './integrations/instrument-router.dire
 	],
 	providers: []
 })
-export class InstrumentationModule {
-
-	static forRoot(): ModuleWithProviders	{
-		return { ngModule: InstrumentationModule, providers: [] };
-	}
-
-}
+export class InstrumentationModule {}
