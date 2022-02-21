@@ -1,0 +1,20 @@
+{
+  "name": "@asymmetrik/ngx-instrumentation",
+  "description": "Angular.io Instrumentation Components and Services",
+  "version": "13.0.0",
+  "author": "Asymmetrik, Ltd.",
+  "copyright": "Copyright Asymmetrik, A BlueHalo Company 2007-2022 - All Rights Reserved.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Asymmetrik/ngx-instrumentation.git"
+  },
+
+  "peerDependencies": {
+    "@angular/common": "13",
+    "@angular/core": "13"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
